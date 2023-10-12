@@ -48,8 +48,10 @@ export default {
         this.pokeData = JSON.parse(savedData);
       } catch (error) {
         // Handle parsing error, if any
-        this.setup()
+        
       }
+    }else{
+      this.setup()
     }
     
     

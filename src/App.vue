@@ -130,7 +130,7 @@ html{
   margin: auto;
   padding: 0;
 
-}
+} 
 
 .region ul li{
   width: calc(20% - 10px);

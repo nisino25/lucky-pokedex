@@ -46,7 +46,7 @@
   <div>
     <div class="wrapper">
       <template v-for="(poke, i) in pokeData" :key="i">
-        <div class="child" :id="'pokemon-' + (i + 1)" :style="{ backgroundColor: poke ? '#DAA520' : '' }" @click="selectMe(i)">
+        <div class="child" :id="'pokemon-' + (i + 1)"    :style="{ backgroundColor: poke ? '#DAA520' : '', opacity: currentPoke === i ? 0.2 : 1 }"  @click="selectMe(i)">
           <img :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png`" :alt="`Pokemon ${i+1}`" :style="{ opacity: poke ? 0.5 : 1 }">
         </div>
       </template>

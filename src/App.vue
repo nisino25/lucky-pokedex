@@ -166,6 +166,10 @@ export default {
 </script>
 
 <style>
+body {
+  touch-action: manipulation;
+}
+
 html{
   background:  #333333 ;
   color: #FFFFFF;

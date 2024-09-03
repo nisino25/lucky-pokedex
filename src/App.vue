@@ -45,7 +45,10 @@
   </div>
   <div>
     <div class="wrapper">
+      <button @click="exportPokeData()" style="display: block; width: 45%; margin-right: 10%">Export</button>
+      <input style="width: 45%;" type="file" @change="importPokeData" />
       <template v-for="(poke, i) in pokeData" :key="i">
+
         <div class="child" :id="'pokemon-' + (i + 1)"    :style="{ backgroundColor: poke ? '#DAA520' : '', opacity: currentPoke === i ? 0.2 : 1 }"  @click="selectMe(i)">
           
 
@@ -129,6 +132,43 @@ export default {
         this.currentPoke = 99999
       }
     },
+    exportPokeData(){
+      // Get current date in yyyyMMdd format
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+      const dd = String(today.getDate()).padStart(2, '0');
+      const formattedDate = `${yyyy}${mm}${dd}`;
+
+      // Convert pokeData to a JSON string
+      const jsonData = JSON.stringify(this.pokeData, null, 2); // null and 2 for pretty-print
+
+      // Create a blob and download it
+      const blob = new Blob([jsonData], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `pokeData_${formattedDate}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    },
+    importPokeData(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            this.pokeData = JSON.parse(e.target.result);
+            console.log("PokeData imported successfully:", this.pokeData);
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+          }
+        };
+        reader.readAsText(file);
+      }
+    }
   },
   watch: {
     pokeData: {
@@ -244,6 +284,10 @@ html{
   flex-wrap: wrap;
   width: 95vw;
   margin: auto;
+}
+
+.wrappr button{
+  
 }
 
 .wrapper .child{

@@ -17,7 +17,7 @@
         <div class="percentage" :style="{ width: (luckyCounts[3] / 113 * 100) + '%' }"></div>
         シンオウ<br>{{ luckyCounts[3] }}/113
       </li>
-      <li @click="scrollToSection('pokemon-494')">
+      <li @click="scrollToSection('pokemon-495')">
         <div class="percentage" :style="{ width: (luckyCounts[4] / 146 * 100) + '%' }"></div>
         イッシュ<br>{{ luckyCounts[4] }}/146
       </li>
@@ -49,7 +49,7 @@
       <input style="width: 45%;" type="file" @change="importPokeData" />
       <template v-for="(poke, i) in pokeData" :key="i">
 
-        <div class="child" :id="'pokemon-' + (i + 1)"    :style="{ backgroundColor: poke ? '#DAA520' : '', opacity: currentPoke === i ? 0.2 : 1 }"  @click="selectMe(i)">
+        <div v-if="i !== 493" class="child" :id="'pokemon-' + (i + 1)"    :style="{ backgroundColor: poke ? '#DAA520' : '', opacity: currentPoke === i ? 0.2 : 1 }"  @click="selectMe(i)">
           
 
           <img :src="i < 649 ? `https://img.pokemondb.net/sprites/black-white/anim/normal/${pokeNameList[i]}.gif` : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png`" :alt="`Pokemon ${i+1}`">
